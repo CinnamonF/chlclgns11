@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최치훈의 하루</title>
+
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    header {
+        background-color: #f8f8f8;
+        padding: 20px 0;
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    nav {
+        background-color: #333;
+        padding: 10px 0;
+    }
+
+	nav a {
+        color: white;
+        margin: 0 120px; /* 기존 15px에서 10px 증가 */
+        text-decoration: none;
+        font-size: 18px;
+    }
+    main {
+        padding: 20px;
+        text-align: left;
+    }
+
+    h2 {
+        text-align: left;
+        margin: 0;
+        padding-bottom: 20px;
+    }
+
+    .tab-content {
+        display: none;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+    </style>
+    
+</head>
+<body>
+    <header>
+        <h1>최치훈의 하루</h1>
+    </header>
+    <nav>
+        <a href="#" class="tab1" data-tab="tab1">아침</a>
+        <a href="#" class="tab2" data-tab="tab2">점심</a>
+        <a href="#" class="tab3" data-tab="tab3">저녁</a>
+    </nav>
+    <main>
+        <h2>일과</h2>
+        <div id="content">
+            <div id="tab1" class="tab-content">아침 내용입니다.</div>
+            <div id="tab2" class="tab-content">점심 내용입니다.</div>
+            <div id="tab3" class="tab-content">저녁 내용입니다.</div>
+        </div>
+    </main>
+
+</body>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const tabs = document.querySelectorAll("nav a");
+        const tabContents = document.querySelectorAll(".tab-content");
+
+        tabs.forEach(tab => {
+            tab.addEventListener("click", function(event) {
+                event.preventDefault();
+
+                // 모든 탭의 active 클래스 제거
+                tabs.forEach(item => item.classList.remove("active"));
+                // 모든 콘텐츠 숨김
+                tabContents.forEach(item => item.classList.remove("active"));
+
+                // 클릭된 탭에 active 클래스 추가
+                tab.classList.add("active");
+
+                // 클릭된 탭의 data-tab 속성값과 일치하는 콘텐츠 보이기
+                const tabId = tab.getAttribute("data-tab");
+                document.getElementById(tabId).classList.add("active");
+            });
+        });
+
+        // 초기 상태에서 첫 번째 탭과 콘텐츠를 활성화
+        if (tabs.length > 0) {
+            tabs[0].classList.add("active");
+            document.getElementById(tabs[0].getAttribute("data-tab")).classList.add("active");
+        }
+    });
+    </script>
+</html>
